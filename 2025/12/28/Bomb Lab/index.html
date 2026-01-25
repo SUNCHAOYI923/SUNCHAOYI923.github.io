@@ -1,0 +1,1029 @@
+
+<!DOCTYPE html><html lang="en" data-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin><link rel="preconnect" href="https://unpkg.com" crossorigin><link rel="preconnect" href="https://cdn.bootcdn.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>CMU CS:APP Bomb Lab - SUNCHAOYI</title>
+
+  
+    <meta name="description" content="CS:APP Bomb Lab ReportName SUNCHAOYI   First use objdump -d bomb &gt; bomb.asm to get its assmebly. Phase_11234567890000000000400ee0 &lt;phase_1&gt;:  400ee0:	48 83 ec 08          	sub    $0x8,%rsp  4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU CS:APP Bomb Lab">
+<meta property="og:url" content="https://sunchaoyi923.github.io/2025/12/28/Bomb%20Lab/">
+<meta property="og:site_name" content="SUNCHAOYI">
+<meta property="og:description" content="CS:APP Bomb Lab ReportName SUNCHAOYI   First use objdump -d bomb &gt; bomb.asm to get its assmebly. Phase_11234567890000000000400ee0 &lt;phase_1&gt;:  400ee0:	48 83 ec 08          	sub    $0x8,%rsp  4">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-25T11:16:11.964Z">
+<meta property="article:author" content="Chaoyi, Sun">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+    <link rel="shortcut icon" href="/img/Favicon.png">
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Chaoyi, Sun","sameAs":[]},"dateCreated":"2025-12-28T00:00:00+08:00","dateModified":"2026-01-25T19:16:11+08:00","datePublished":"2025-12-28T00:00:00+08:00","description":"","headline":"CMU CS:APP Bomb Lab","mainEntityOfPage":{"@type":"WebPage","@id":"https://sunchaoyi923.github.io/2025/12/28/Bomb%20Lab/"},"publisher":{"@type":"Organization","name":"Chaoyi, Sun","sameAs":[]},"url":"https://sunchaoyi923.github.io/2025/12/28/Bomb%20Lab/","thumbnailUrl":"/img/CUHKSZ.jpg","image":1}</script>
+  <link rel="shortcut icon" href="/img/Avatar.jpg"><meta name="theme-color" content="#f8f8f8"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" media="all" />
+</head>
+<body><div class="sitebg"><div class="siteblur"></div></div>
+
+<div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="/img/Avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/"><div class="main">超闻逸事</div><div class="sub normal cap">Life & Academy</div><div class="sub hover cap" style="opacity:0"> Designed by SUNCHAOYI</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="Self-Introduction" href="/Myself/" style="color:#3DC550"><img no-lazy src="/img/me.jpg" / onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="nav-item" title="Blog" href="/" style="color:#1BCDFC"><img no-lazy src="/img/post.jpg" / onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="nav-item" title="Favorite" href="/favorite/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="Search"></form><div id="search-result"></div><div class="search-no-result">No Results!</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2022/10/04/NOIP2022/"><span class="title">2022 NOIP 备赛记</span></a><a class="item title" href="/2026/01/05/Architecture%20Lab/"><span class="title">CMU CS:APP Architecture Lab</span></a><a class="item title" href="/2025/12/28/Bomb%20Lab/"><span class="title">CMU CS:APP Bomb Lab</span></a><a class="item title" href="/2025/05/02/XCPC2025-2026/"><span class="title">2025-2026 XCPC</span></a><a class="item title" href="/2026/01/23/hash/"><span class="title">卡哈希</span></a><a class="item title" href="/2024/08/13/XOR/"><span class="title">求 $[1,n]$ 的异或和</span></a><a class="item title" href="/2025/01/03/summary24/"><span class="title">2024 年度小结</span></a><a class="item title" href="/2025/12/25/Data%20Lab/"><span class="title">CMU CS:APP Data Lab</span></a><a class="item title" href="/2025/12/28/Attack%20Lab/"><span class="title">CMU CS:APP Attack Lab</span></a><a class="item title" href="/2020/10/19/UVA12167/"><span class="title">题解：UVA12167 Proving Equivalences</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Academy/">Academy</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2025-12-27T16:00:00.000Z">2025-12-28</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2026-01-25T11:16:11.964Z">2026-01-25</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>CMU CS:APP Bomb Lab</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="CS-APP-Bomb-Lab-Report"><a href="#CS-APP-Bomb-Lab-Report" class="headerlink" title="CS:APP Bomb Lab Report"></a>CS:APP Bomb Lab Report</h1><p><strong>Name</strong> SUNCHAOYI  </p>
+<p>First use <code>objdump -d bomb &gt; bomb.asm</code> to get its assmebly.</p>
+<h2 id="Phase-1"><a href="#Phase-1" class="headerlink" title="Phase_1"></a>Phase_1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0000000000400ee0 &lt;phase_1&gt;:</span><br><span class="line">  400ee0:	48 83 ec 08          	sub    $0x8,%rsp</span><br><span class="line">  400ee4:	be 00 24 40 00       	mov    $0x402400,%esi</span><br><span class="line">  400ee9:	e8 4a 04 00 00       	call   401338 &lt;strings_not_equal&gt;</span><br><span class="line">  400eee:	85 c0                	test   %eax,%eax</span><br><span class="line">  400ef0:	74 05                	je     400ef7 &lt;phase_1+0x17&gt;</span><br><span class="line">  400ef2:	e8 43 05 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  400ef7:	48 83 c4 08          	add    $0x8,%rsp</span><br><span class="line">  400efb:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>mov    $0x402400,%esi</code></p>
+<p>  <code>0x402400</code> contains the password string. Use GDB’s <code>x/s</code> command to display the string at that memory address:</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb bomb</span><br><span class="line">(gdb) x/s 0x402400</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>The Phase_1 answer is <code>Border relations with Canada have never been better.</code></p>
+<h2 id="Phase-2"><a href="#Phase-2" class="headerlink" title="Phase_2"></a>Phase_2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">0000000000400efc &lt;phase_2&gt;:</span><br><span class="line">  400efc:	55                   	push   %rbp</span><br><span class="line">  400efd:	53                   	push   %rbx</span><br><span class="line">  400efe:	48 83 ec 28          	sub    $0x28,%rsp</span><br><span class="line">  400f02:	48 89 e6             	mov    %rsp,%rsi</span><br><span class="line">  400f05:	e8 52 05 00 00       	call   40145c &lt;read_six_numbers&gt;</span><br><span class="line">  400f0a:	83 3c 24 01          	cmpl   $0x1,(%rsp)</span><br><span class="line">  400f0e:	74 20                	je     400f30 &lt;phase_2+0x34&gt;</span><br><span class="line">  400f10:	e8 25 05 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  400f15:	eb 19                	jmp    400f30 &lt;phase_2+0x34&gt;</span><br><span class="line">  400f17:	8b 43 fc             	mov    -0x4(%rbx),%eax</span><br><span class="line">  400f1a:	01 c0                	add    %eax,%eax</span><br><span class="line">  400f1c:	39 03                	cmp    %eax,(%rbx)</span><br><span class="line">  400f1e:	74 05                	je     400f25 &lt;phase_2+0x29&gt;</span><br><span class="line">  400f20:	e8 15 05 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  400f25:	48 83 c3 04          	add    $0x4,%rbx</span><br><span class="line">  400f29:	48 39 eb             	cmp    %rbp,%rbx</span><br><span class="line">  400f2c:	75 e9                	jne    400f17 &lt;phase_2+0x1b&gt;</span><br><span class="line">  400f2e:	eb 0c                	jmp    400f3c &lt;phase_2+0x40&gt;</span><br><span class="line">  400f30:	48 8d 5c 24 04       	lea    0x4(%rsp),%rbx</span><br><span class="line">  400f35:	48 8d 6c 24 18       	lea    0x18(%rsp),%rbp</span><br><span class="line">  400f3a:	eb db                	jmp    400f17 &lt;phase_2+0x1b&gt;</span><br><span class="line">  400f3c:	48 83 c4 28          	add    $0x28,%rsp</span><br><span class="line">  400f40:	5b                   	pop    %rbx</span><br><span class="line">  400f41:	5d                   	pop    %rbp</span><br><span class="line">  400f42:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>cmpl $0x1,(%rsp)</code> &amp; <code>je     400f30 &lt;phase_2+0x34&gt;</code></p>
+<p>  If the value at the top of the stack is 1, jump to address <code>0x400f30</code>.</p>
+</li>
+<li><p><code>lea    0x4(%rsp),%rbx</code> &amp; <code>lea    0x18(%rsp),%rbp</code> &amp; <code>jmp    400f17 &lt;phase_2+0x1b&gt;</code></p>
+<p>  <code>%rbx</code> is set to point to the second element of the array (<code>&amp;numbers[1]</code>).</p>
+<p>  <code>%rbp</code> is set to point just past the last element (<code>&amp;numbers[6]</code>), since <code>0x18</code> $= 6 \times 4 = 24$ bytes.  </p>
+<p>  Execution then jumps to the loop body at <code>400f17</code>.</p>
+</li>
+<li><p><code>400f17</code> $\sim$ <code>400f2c</code> (loop body)</p>
+<p>  Load the previous element (<code>numbers[i-1]</code>) into <code>%eax</code>, double it, and compare the result with the current element (<code>numbers[i]</code>).  </p>
+<p>  Only if <code>numbers[i] == 2 * numbers[i-1]</code> does the loop continue; otherwise the bomb explodes.  </p>
+<p>  After processing all six numbers, control jumps to <code>400f3c</code> (loop exit).</p>
+</li>
+</ul>
+<p>The required sequence for Phase 2 is therefore <code>1 2 4 8 16 32</code>.</p>
+<h2 id="Phase-3"><a href="#Phase-3" class="headerlink" title="Phase_3"></a>Phase_3</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">0000000000400f43 &lt;phase_3&gt;:</span><br><span class="line">  400f43:	48 83 ec 18          	sub    $0x18,%rsp</span><br><span class="line">  400f47:	48 8d 4c 24 0c       	lea    0xc(%rsp),%rcx</span><br><span class="line">  400f4c:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx</span><br><span class="line">  400f51:	be cf 25 40 00       	mov    $0x4025cf,%esi</span><br><span class="line">  400f56:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  400f5b:	e8 90 fc ff ff       	call   400bf0 &lt;__isoc99_sscanf@plt&gt;</span><br><span class="line">  400f60:	83 f8 01             	cmp    $0x1,%eax</span><br><span class="line">  400f63:	7f 05                	jg     400f6a &lt;phase_3+0x27&gt;</span><br><span class="line">  400f65:	e8 d0 04 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  400f6a:	83 7c 24 08 07       	cmpl   $0x7,0x8(%rsp)</span><br><span class="line">  400f6f:	77 3c                	ja     400fad &lt;phase_3+0x6a&gt;</span><br><span class="line">  400f71:	8b 44 24 08          	mov    0x8(%rsp),%eax</span><br><span class="line">  400f75:	ff 24 c5 70 24 40 00 	jmp    *0x402470(,%rax,8)</span><br><span class="line">  400f7c:	b8 cf 00 00 00       	mov    $0xcf,%eax</span><br><span class="line">  400f81:	eb 3b                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400f83:	b8 c3 02 00 00       	mov    $0x2c3,%eax</span><br><span class="line">  400f88:	eb 34                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400f8a:	b8 00 01 00 00       	mov    $0x100,%eax</span><br><span class="line">  400f8f:	eb 2d                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400f91:	b8 85 01 00 00       	mov    $0x185,%eax</span><br><span class="line">  400f96:	eb 26                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400f98:	b8 ce 00 00 00       	mov    $0xce,%eax</span><br><span class="line">  400f9d:	eb 1f                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400f9f:	b8 aa 02 00 00       	mov    $0x2aa,%eax</span><br><span class="line">  400fa4:	eb 18                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400fa6:	b8 47 01 00 00       	mov    $0x147,%eax</span><br><span class="line">  400fab:	eb 11                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400fad:	e8 88 04 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  400fb2:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  400fb7:	eb 05                	jmp    400fbe &lt;phase_3+0x7b&gt;</span><br><span class="line">  400fb9:	b8 37 01 00 00       	mov    $0x137,%eax</span><br><span class="line">  400fbe:	3b 44 24 0c          	cmp    0xc(%rsp),%eax</span><br><span class="line">  400fc2:	74 05                	je     400fc9 &lt;phase_3+0x86&gt;</span><br><span class="line">  400fc4:	e8 71 04 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  400fc9:	48 83 c4 18          	add    $0x18,%rsp</span><br><span class="line">  400fcd:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>mov    $0x4025cf,%esi</code> &amp; <code>cmp    $0x1,%eax</code> &amp; <code>jg     400f6a &lt;phase_3+0x27&gt;</code></p>
+<p>  Using <code>(gdb) x/s 0x4025cf</code> shows <code>&quot;%d %d&quot;</code>, meaning the input must be two integers separated by a space.  </p>
+<p>  If <code>sscanf</code> returns a value $\le 1$, the bomb explodes.</p>
+</li>
+<li><p><code>lea    0xc(%rsp),%rcx</code> &amp; <code>lea    0x8(%rsp),%rdx</code> &amp; <code>cmpl   $0x7,0x8(%rsp)</code> &amp; <code>ja     400fad &lt;phase_3+0x6a&gt;</code></p>
+<p> <code>%rdx</code> points to where the first integer is stored (<code>0x8(%rsp)</code>), and <code>%rcx</code> points to the second integer (<code>0xc(%rsp)</code>).  </p>
+<p>  The first integer must be $\le 7$, otherwise the bomb explodes.</p>
+</li>
+<li><p><code>400f7c</code> $\sim$ <code>400fbe</code> (switch body)</p>
+<p>  Each case loads a specific immediate value into <code>%eax</code>, then jumps to a common check at <code>400fbe</code>.  </p>
+<p>  There, the loaded value is compared with the second integer. Only if they are equal does the phase pass.</p>
+</li>
+</ul>
+<p>From the jump‑table cases we obtain the valid pairs:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 207 / 1 311 / 2 707 / 3 256 / 4 389 / 5 206 / 6 682 / 7 327</span><br></pre></td></tr></table></figure>
+<p>Any one of these pairs is a correct solution.</p>
+<h2 id="Phase-4"><a href="#Phase-4" class="headerlink" title="Phase_4"></a>Phase_4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">0000000000400fce &lt;func4&gt;:</span><br><span class="line">  400fce:	48 83 ec 08          	sub    $0x8,%rsp</span><br><span class="line">  400fd2:	89 d0                	mov    %edx,%eax</span><br><span class="line">  400fd4:	29 f0                	sub    %esi,%eax</span><br><span class="line">  400fd6:	89 c1                	mov    %eax,%ecx</span><br><span class="line">  400fd8:	c1 e9 1f             	shr    $0x1f,%ecx</span><br><span class="line">  400fdb:	01 c8                	add    %ecx,%eax</span><br><span class="line">  400fdd:	d1 f8                	sar    $1,%eax</span><br><span class="line">  400fdf:	8d 0c 30             	lea    (%rax,%rsi,1),%ecx</span><br><span class="line">  400fe2:	39 f9                	cmp    %edi,%ecx</span><br><span class="line">  400fe4:	7e 0c                	jle    400ff2 &lt;func4+0x24&gt;</span><br><span class="line">  400fe6:	8d 51 ff             	lea    -0x1(%rcx),%edx</span><br><span class="line">  400fe9:	e8 e0 ff ff ff       	call   400fce &lt;func4&gt;</span><br><span class="line">  400fee:	01 c0                	add    %eax,%eax</span><br><span class="line">  400ff0:	eb 15                	jmp    401007 &lt;func4+0x39&gt;</span><br><span class="line">  400ff2:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  400ff7:	39 f9                	cmp    %edi,%ecx</span><br><span class="line">  400ff9:	7d 0c                	jge    401007 &lt;func4+0x39&gt;</span><br><span class="line">  400ffb:	8d 71 01             	lea    0x1(%rcx),%esi</span><br><span class="line">  400ffe:	e8 cb ff ff ff       	call   400fce &lt;func4&gt;</span><br><span class="line">  401003:	8d 44 00 01          	lea    0x1(%rax,%rax,1),%eax</span><br><span class="line">  401007:	48 83 c4 08          	add    $0x8,%rsp</span><br><span class="line">  40100b:	c3                   	ret</span><br><span class="line">000000000040100c &lt;phase_4&gt;:</span><br><span class="line">  40100c:	48 83 ec 18          	sub    $0x18,%rsp</span><br><span class="line">  401010:	48 8d 4c 24 0c       	lea    0xc(%rsp),%rcx</span><br><span class="line">  401015:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx</span><br><span class="line">  40101a:	be cf 25 40 00       	mov    $0x4025cf,%esi</span><br><span class="line">  40101f:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  401024:	e8 c7 fb ff ff       	call   400bf0 &lt;__isoc99_sscanf@plt&gt;</span><br><span class="line">  401029:	83 f8 02             	cmp    $0x2,%eax</span><br><span class="line">  40102c:	75 07                	jne    401035 &lt;phase_4+0x29&gt;</span><br><span class="line">  40102e:	83 7c 24 08 0e       	cmpl   $0xe,0x8(%rsp)</span><br><span class="line">  401033:	76 05                	jbe    40103a &lt;phase_4+0x2e&gt;</span><br><span class="line">  401035:	e8 00 04 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  40103a:	ba 0e 00 00 00       	mov    $0xe,%edx</span><br><span class="line">  40103f:	be 00 00 00 00       	mov    $0x0,%esi</span><br><span class="line">  401044:	8b 7c 24 08          	mov    0x8(%rsp),%edi</span><br><span class="line">  401048:	e8 81 ff ff ff       	call   400fce &lt;func4&gt;</span><br><span class="line">  40104d:	85 c0                	test   %eax,%eax</span><br><span class="line">  40104f:	75 07                	jne    401058 &lt;phase_4+0x4c&gt;</span><br><span class="line">  401051:	83 7c 24 0c 00       	cmpl   $0x0,0xc(%rsp)</span><br><span class="line">  401056:	74 05                	je     40105d &lt;phase_4+0x51&gt;</span><br><span class="line">  401058:	e8 dd 03 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  40105d:	48 83 c4 18          	add    $0x18,%rsp</span><br><span class="line">  401061:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>mov    $0x4025cf,%esi</code> &amp; <code>cmp    $0x2,%eax</code> &amp; <code>jne    401035 &lt;phase_4+0x29&gt;</code></p>
+<p>  Using <code>(gdb) x/s 0x4025cf</code> shows <code>&quot;%d %d&quot;</code>, meaning the input must be two integers separated by a space.  </p>
+<p>  If <code>sscanf</code> returns a value $\neq 2$, the bomb explodes.</p>
+</li>
+<li><p><code>lea    0xc(%rsp),%rcx</code> &amp; <code>lea    0x8(%rsp),%rdx</code> &amp; <code>cmpl   $0xe,0x8(%rsp)</code> &amp; <code>cmpl   $0x0,0xc(%rsp)</code></p>
+<p> <code>%rdx</code> points to where the first integer is stored (<code>0x8(%rsp)</code>), and <code>%rcx</code> points to the second integer (<code>0xc(%rsp)</code>).  </p>
+<p>  The first integer must be $\le 14$, the second integer must exactly $0$, otherwise the bomb explodes.</p>
+</li>
+<li><p><code>mov    $0xe,%edx</code> &amp; <code>mov    $0x0,%esi</code> &amp; <code>mov    0x8(%rsp),%edi</code> &amp; call   400fce <func4><code>&amp;</code>cmpl   $0x0,0xc(%rsp)`</p>
+<p>  Three arguments are passed to <code>func4</code>, i.e. <code>func4(first_number,0,14)</code>.  </p>
+<p>  The function must return 0, otherwise the bomb explodes.</p>
+</li>
+<li><p><code>&lt;func4&gt;</code> assembly translated to C language </p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">func4</span><span class="params">(<span class="type">int</span> target, <span class="type">int</span> low, <span class="type">int</span> high)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid = low + (high - low) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">//since low = 0,high = 14 so the sign bit = 0, which can be ignored.</span></span><br><span class="line">    <span class="keyword">if</span> (mid &lt;= target)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mid &gt;= target) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// i.e. target can be found</span></span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span> * func4 (target,low,high) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        high = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span> * func4 (target,low,high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>The function returns $0$ only when first_number lies on the “mid‑point path” of the binary search.The valid values for the first number are $0,1,3,7$.</p>
+<p>Combining all conditions, the correct answers for Phase_4 are any of the following pairs:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 0 / 1 0 / 3 0 / 7 0</span><br></pre></td></tr></table></figure>
+<h2 id="Phase-5"><a href="#Phase-5" class="headerlink" title="Phase_5"></a>Phase_5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">0000000000401062 &lt;phase_5&gt;:</span><br><span class="line">  401062:	53                   	push   %rbx</span><br><span class="line">  401063:	48 83 ec 20          	sub    $0x20,%rsp</span><br><span class="line">  401067:	48 89 fb             	mov    %rdi,%rbx</span><br><span class="line">  40106a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax</span><br><span class="line">  401071:	00 00 </span><br><span class="line">  401073:	48 89 44 24 18       	mov    %rax,0x18(%rsp)</span><br><span class="line">  401078:	31 c0                	xor    %eax,%eax</span><br><span class="line">  40107a:	e8 9c 02 00 00       	call   40131b &lt;string_length&gt;</span><br><span class="line">  40107f:	83 f8 06             	cmp    $0x6,%eax</span><br><span class="line">  401082:	74 4e                	je     4010d2 &lt;phase_5+0x70&gt;</span><br><span class="line">  401084:	e8 b1 03 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  401089:	eb 47                	jmp    4010d2 &lt;phase_5+0x70&gt;</span><br><span class="line">  40108b:	0f b6 0c 03          	movzbl (%rbx,%rax,1),%ecx</span><br><span class="line">  40108f:	88 0c 24             	mov    %cl,(%rsp)</span><br><span class="line">  401092:	48 8b 14 24          	mov    (%rsp),%rdx</span><br><span class="line">  401096:	83 e2 0f             	and    $0xf,%edx</span><br><span class="line">  401099:	0f b6 92 b0 24 40 00 	movzbl 0x4024b0(%rdx),%edx</span><br><span class="line">  4010a0:	88 54 04 10          	mov    %dl,0x10(%rsp,%rax,1)</span><br><span class="line">  4010a4:	48 83 c0 01          	add    $0x1,%rax</span><br><span class="line">  4010a8:	48 83 f8 06          	cmp    $0x6,%rax</span><br><span class="line">  4010ac:	75 dd                	jne    40108b &lt;phase_5+0x29&gt;</span><br><span class="line">  4010ae:	c6 44 24 16 00       	movb   $0x0,0x16(%rsp)</span><br><span class="line">  4010b3:	be 5e 24 40 00       	mov    $0x40245e,%esi</span><br><span class="line">  4010b8:	48 8d 7c 24 10       	lea    0x10(%rsp),%rdi</span><br><span class="line">  4010bd:	e8 76 02 00 00       	call   401338 &lt;strings_not_equal&gt;</span><br><span class="line">  4010c2:	85 c0                	test   %eax,%eax</span><br><span class="line">  4010c4:	74 13                	je     4010d9 &lt;phase_5+0x77&gt;</span><br><span class="line">  4010c6:	e8 6f 03 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  4010cb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)</span><br><span class="line">  4010d0:	eb 07                	jmp    4010d9 &lt;phase_5+0x77&gt;</span><br><span class="line">  4010d2:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  4010d7:	eb b2                	jmp    40108b &lt;phase_5+0x29&gt;</span><br><span class="line">  4010d9:	48 8b 44 24 18       	mov    0x18(%rsp),%rax</span><br><span class="line">  4010de:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax</span><br><span class="line">  4010e5:	00 00 </span><br><span class="line">  4010e7:	74 05                	je     4010ee &lt;phase_5+0x8c&gt;</span><br><span class="line">  4010e9:	e8 42 fa ff ff       	call   400b30 &lt;__stack_chk_fail@plt&gt;</span><br><span class="line">  4010ee:	48 83 c4 20          	add    $0x20,%rsp</span><br><span class="line">  4010f2:	5b                   	pop    %rbx</span><br><span class="line">  4010f3:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>call   40131b &lt;string_length&gt;</code> &amp; <code>cmp    $0x6,%eax</code></p>
+<p>  The input must be a string of <strong>exactly six characters</strong>.</p>
+</li>
+<li><p><code>40108b</code> $\sim$ <code>4010ac</code> (loop body)</p>
+<p>  For each character <code>input[i]</code>:</p>
+<ol>
+<li>Take its low‑order 4 bits (<code>input[i] &amp; 0xF</code>) as an index ($0 \sim 15$).</li>
+<li>Use that index to look up a character from a table stored at address <code>0x4024b0</code>.</li>
+<li><p>Store the looked‑up character into an output buffer on the stack.</p>
+<p>Examining the table <code>(gdb) x/s 0x4024b0</code>, get <code>maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?</code>. The relevant part is the first 16 characters: <code>maduiersnfotvbyl</code>.</p>
+<p>The converted six‑character string must equal the string at <code>0x40245e</code>. Checking <code>(gdb) x/s 0x40245e</code>, get <code>flyers</code>.</p>
+<p>Hence the condition for each position $i$ is: <code>table[input[i] &amp; 0xF] == &quot;flyers&quot;[i]</code></p>
+</li>
+</ol>
+</li>
+</ul>
+<p>Therefore, the answer is <code>ionefg</code>.</p>
+<h2 id="Phase-6"><a href="#Phase-6" class="headerlink" title="Phase_6"></a>Phase_6</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">00000000004010f4 &lt;phase_6&gt;:</span><br><span class="line">  4010f4:	41 56                	push   %r14</span><br><span class="line">  4010f6:	41 55                	push   %r13</span><br><span class="line">  4010f8:	41 54                	push   %r12</span><br><span class="line">  4010fa:	55                   	push   %rbp</span><br><span class="line">  4010fb:	53                   	push   %rbx</span><br><span class="line">  4010fc:	48 83 ec 50          	sub    $0x50,%rsp</span><br><span class="line">  401100:	49 89 e5             	mov    %rsp,%r13</span><br><span class="line">  401103:	48 89 e6             	mov    %rsp,%rsi</span><br><span class="line">  401106:	e8 51 03 00 00       	call   40145c &lt;read_six_numbers&gt;</span><br><span class="line">  40110b:	49 89 e6             	mov    %rsp,%r14</span><br><span class="line">  40110e:	41 bc 00 00 00 00    	mov    $0x0,%r12d</span><br><span class="line">  401114:	4c 89 ed             	mov    %r13,%rbp</span><br><span class="line">  401117:	41 8b 45 00          	mov    0x0(%r13),%eax</span><br><span class="line">  40111b:	83 e8 01             	sub    $0x1,%eax</span><br><span class="line">  40111e:	83 f8 05             	cmp    $0x5,%eax</span><br><span class="line">  401121:	76 05                	jbe    401128 &lt;phase_6+0x34&gt;</span><br><span class="line">  401123:	e8 12 03 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  401128:	41 83 c4 01          	add    $0x1,%r12d</span><br><span class="line">  40112c:	41 83 fc 06          	cmp    $0x6,%r12d</span><br><span class="line">  401130:	74 21                	je     401153 &lt;phase_6+0x5f&gt;</span><br><span class="line">  401132:	44 89 e3             	mov    %r12d,%ebx</span><br><span class="line">  401135:	48 63 c3             	movslq %ebx,%rax</span><br><span class="line">  401138:	8b 04 84             	mov    (%rsp,%rax,4),%eax</span><br><span class="line">  40113b:	39 45 00             	cmp    %eax,0x0(%rbp)</span><br><span class="line">  40113e:	75 05                	jne    401145 &lt;phase_6+0x51&gt;</span><br><span class="line">  401140:	e8 f5 02 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  401145:	83 c3 01             	add    $0x1,%ebx</span><br><span class="line">  401148:	83 fb 05             	cmp    $0x5,%ebx</span><br><span class="line">  40114b:	7e e8                	jle    401135 &lt;phase_6+0x41&gt;</span><br><span class="line">  40114d:	49 83 c5 04          	add    $0x4,%r13</span><br><span class="line">  401151:	eb c1                	jmp    401114 &lt;phase_6+0x20&gt;</span><br><span class="line">  401153:	48 8d 74 24 18       	lea    0x18(%rsp),%rsi</span><br><span class="line">  401158:	4c 89 f0             	mov    %r14,%rax</span><br><span class="line">  40115b:	b9 07 00 00 00       	mov    $0x7,%ecx</span><br><span class="line">  401160:	89 ca                	mov    %ecx,%edx</span><br><span class="line">  401162:	2b 10                	sub    (%rax),%edx</span><br><span class="line">  401164:	89 10                	mov    %edx,(%rax)</span><br><span class="line">  401166:	48 83 c0 04          	add    $0x4,%rax</span><br><span class="line">  40116a:	48 39 f0             	cmp    %rsi,%rax</span><br><span class="line">  40116d:	75 f1                	jne    401160 &lt;phase_6+0x6c&gt;</span><br><span class="line">  40116f:	be 00 00 00 00       	mov    $0x0,%esi</span><br><span class="line">  401174:	eb 21                	jmp    401197 &lt;phase_6+0xa3&gt;</span><br><span class="line">  401176:	48 8b 52 08          	mov    0x8(%rdx),%rdx</span><br><span class="line">  40117a:	83 c0 01             	add    $0x1,%eax</span><br><span class="line">  40117d:	39 c8                	cmp    %ecx,%eax</span><br><span class="line">  40117f:	75 f5                	jne    401176 &lt;phase_6+0x82&gt;</span><br><span class="line">  401181:	eb 05                	jmp    401188 &lt;phase_6+0x94&gt;</span><br><span class="line">  401183:	ba d0 32 60 00       	mov    $0x6032d0,%edx</span><br><span class="line">  401188:	48 89 54 74 20       	mov    %rdx,0x20(%rsp,%rsi,2)</span><br><span class="line">  40118d:	48 83 c6 04          	add    $0x4,%rsi</span><br><span class="line">  401191:	48 83 fe 18          	cmp    $0x18,%rsi</span><br><span class="line">  401195:	74 14                	je     4011ab &lt;phase_6+0xb7&gt;</span><br><span class="line">  401197:	8b 0c 34             	mov    (%rsp,%rsi,1),%ecx</span><br><span class="line">  40119a:	83 f9 01             	cmp    $0x1,%ecx</span><br><span class="line">  40119d:	7e e4                	jle    401183 &lt;phase_6+0x8f&gt;</span><br><span class="line">  40119f:	b8 01 00 00 00       	mov    $0x1,%eax</span><br><span class="line">  4011a4:	ba d0 32 60 00       	mov    $0x6032d0,%edx</span><br><span class="line">  4011a9:	eb cb                	jmp    401176 &lt;phase_6+0x82&gt;</span><br><span class="line">  4011ab:	48 8b 5c 24 20       	mov    0x20(%rsp),%rbx</span><br><span class="line">  4011b0:	48 8d 44 24 28       	lea    0x28(%rsp),%rax</span><br><span class="line">  4011b5:	48 8d 74 24 50       	lea    0x50(%rsp),%rsi</span><br><span class="line">  4011ba:	48 89 d9             	mov    %rbx,%rcx</span><br><span class="line">  4011bd:	48 8b 10             	mov    (%rax),%rdx</span><br><span class="line">  4011c0:	48 89 51 08          	mov    %rdx,0x8(%rcx)</span><br><span class="line">  4011c4:	48 83 c0 08          	add    $0x8,%rax</span><br><span class="line">  4011c8:	48 39 f0             	cmp    %rsi,%rax</span><br><span class="line">  4011cb:	74 05                	je     4011d2 &lt;phase_6+0xde&gt;</span><br><span class="line">  4011cd:	48 89 d1             	mov    %rdx,%rcx</span><br><span class="line">  4011d0:	eb eb                	jmp    4011bd &lt;phase_6+0xc9&gt;</span><br><span class="line">  4011d2:	48 c7 42 08 00 00 00 	movq   $0x0,0x8(%rdx)</span><br><span class="line">  4011d9:	00 </span><br><span class="line">  4011da:	bd 05 00 00 00       	mov    $0x5,%ebp</span><br><span class="line">  4011df:	48 8b 43 08          	mov    0x8(%rbx),%rax</span><br><span class="line">  4011e3:	8b 00                	mov    (%rax),%eax</span><br><span class="line">  4011e5:	39 03                	cmp    %eax,(%rbx)</span><br><span class="line">  4011e7:	7d 05                	jge    4011ee &lt;phase_6+0xfa&gt;</span><br><span class="line">  4011e9:	e8 4c 02 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  4011ee:	48 8b 5b 08          	mov    0x8(%rbx),%rbx</span><br><span class="line">  4011f2:	83 ed 01             	sub    $0x1,%ebp</span><br><span class="line">  4011f5:	75 e8                	jne    4011df &lt;phase_6+0xeb&gt;</span><br><span class="line">  4011f7:	48 83 c4 50          	add    $0x50,%rsp</span><br><span class="line">  4011fb:	5b                   	pop    %rbx</span><br><span class="line">  4011fc:	5d                   	pop    %rbp</span><br><span class="line">  4011fd:	41 5c                	pop    %r12</span><br><span class="line">  4011ff:	41 5d                	pop    %r13</span><br><span class="line">  401201:	41 5e                	pop    %r14</span><br><span class="line">  401203:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>4010f4</code> $\sim$ <code>40110e</code></p>
+<p>  Calls <code>read_six_numbers</code> to read six integers into an array on the stack.</p>
+</li>
+<li><p><code>401114</code> $\sim$ <code>401151</code></p>
+<p>  The double loop checks <code>1 &lt;= number[i] &lt;= 6</code> (subtracting 1 converts the range check into an unsigned comparison with 5) and ensures all six numbers are distinct.</p>
+</li>
+<li><p><code>401153</code> $\sim$ <code>40116d</code></p>
+<p>  Each number is transformed as <code>number[i] = 7 - number[i]</code></p>
+</li>
+<li><p><code>40116f</code> $\sim$ <code>4011a9</code></p>
+<p>  The starting address <code>0x6032d0</code> is examined. Inspection via <code>(gdb) x/128x 0x6032d0</code> reveals a linked-list structure.</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">0x6032d0 &lt;node1&gt;:       0x4c    0x01    0x00    0x00    0x01    0x00    0x00    0x00</span><br><span class="line">0x6032d8 &lt;node1+8&gt;:     0xe0    0x32    0x60    0x00    0x00    0x00    0x00    0x00</span><br><span class="line">0x6032e0 &lt;node2&gt;:       0xa8    0x00    0x00    0x00    0x02    0x00    0x00    0x00</span><br><span class="line">0x6032e8 &lt;node2+8&gt;:     0xf0    0x32    0x60    0x00    0x00    0x00    0x00    0x00</span><br><span class="line">0x6032f0 &lt;node3&gt;:       0x9c    0x03    0x00    0x00    0x03    0x00    0x00    0x00</span><br><span class="line">0x6032f8 &lt;node3+8&gt;:     0x00    0x33    0x60    0x00    0x00    0x00    0x00    0x00</span><br><span class="line">0x603300 &lt;node4&gt;:       0xb3    0x02    0x00    0x00    0x04    0x00    0x00    0x00</span><br><span class="line">0x603308 &lt;node4+8&gt;:     0x10    0x33    0x60    0x00    0x00    0x00    0x00    0x00</span><br><span class="line">0x603310 &lt;node5&gt;:       0xdd    0x01    0x00    0x00    0x05    0x00    0x00    0x00</span><br><span class="line">0x603318 &lt;node5+8&gt;:     0x20    0x33    0x60    0x00    0x00    0x00    0x00    0x00</span><br><span class="line">0x603320 &lt;node6&gt;:       0xbb    0x01    0x00    0x00    0x06    0x00    0x00    0x00</span><br><span class="line">0x603328 &lt;node6+8&gt;:     0x00    0x00    0x00    0x00    0x00    0x00    0x00    0x00</span><br></pre></td></tr></table></figure>
+<p>  Each node occupies 16 bits (value (4 bits), id (4 bits) address (8 bits)) organized in Little-Endian format. This structure clearly defines a singly linked list.</p>
+<p>  |node $i$|value|address|next pointer|<br>  |:—:|:—:|:—:|:—:|<br>  |$1$|$\texttt{0x14c}$|$\texttt{0x6032d0}$|$\texttt{0x6032e0}$|<br>  |$2$|$\texttt{0xa8}$|$\texttt{0x6032e0}$|$\texttt{0x6032f0}$|<br>  |$3$|$\texttt{0x39c}$|$\texttt{0x6032f0}$|$\texttt{0x603300}$|<br>  |$4$|$\texttt{0x2b3}$|$\texttt{0x603300}$|$\texttt{0x603310}$|<br>  |$5$|$\texttt{0x1dd}$|$\texttt{0x603310}$|$\texttt{0x603320}$|<br>  |$6$|$\texttt{0x1bb}$|$\texttt{0x603320}$|$\texttt{NULL}$|</p>
+<p>  For each transformed <code>number[i]</code>, if <code>number[i] &lt;= 1</code>, the head node is used directly; otherwise, a loop traverses the list to select the <code>number[i]</code>-th node.</p>
+</li>
+<li><p><code>4011ab</code> $\sim$ <code>4011d9</code></p>
+<p>  The code rebuilds the linked list according to the order specified by the transformed <code>number[i]</code> values.</p>
+<ul>
+<li><p><strong>Register roles</strong></p>
+<ul>
+<li><p><code>%rbx</code> Address of the new head node (read from <code>node_ptrs[0]</code> on the stack)</p>
+</li>
+<li><p><code>%rcx</code> Address of the current node being processed</p>
+</li>
+<li><p><code>%rdx</code> Address of the next node (read from the pointer array on the stack)</p>
+</li>
+<li><p><code>%rax</code> Points to the storage location of the next node pointer <strong>in the stack array</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Instructions</strong></p>
+<ul>
+<li><p><code>mov %rbx,%rcx</code> Set the current node to the head node</p>
+</li>
+<li><p><code>mov (%rax),%rdx</code> Read the address of the next node from the stack</p>
+</li>
+<li><p><code>mov %rdx,0x8(%rcx)</code> Make the current node point to the next node</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>4011da</code> $\sim$ <code>4011f5</code></p>
+<p>  <code>cmp    %eax,(%rbx)</code> This ensures the final list is sorted in non‑increasing order by the integer values stored in the nodes.</p>
+</li>
+</ul>
+<p>The original values in the list are $[\texttt{0x14c},\texttt{0xa8},\texttt{0x39c},\texttt{0x2b3},\texttt{0x1dd},\texttt{0x1bb}]$. When sorted in descending order by value, the corresponding node IDs are $[3,4,5,6,1,2]$. This ID order represents the <strong>transformed</strong> input. Since the transformation is <code>num[i] = 7 - original[i]</code>, we reverse it to obtain the original input <code>4,3,2,1,6,5</code>.</p>
+<h2 id="secret-phase"><a href="#secret-phase" class="headerlink" title="secret_phase"></a>secret_phase</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">00000000004015c4 &lt;phase_defused&gt;:</span><br><span class="line">  4015c4:	48 83 ec 78          	sub    $0x78,%rsp</span><br><span class="line">  4015c8:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax</span><br><span class="line">  4015cf:	00 00 </span><br><span class="line">  4015d1:	48 89 44 24 68       	mov    %rax,0x68(%rsp)</span><br><span class="line">  4015d6:	31 c0                	xor    %eax,%eax</span><br><span class="line">  4015d8:	83 3d 81 21 20 00 06 	cmpl   $0x6,0x202181(%rip)        # 603760 &lt;num_input_strings&gt;</span><br><span class="line">  4015df:	75 5e                	jne    40163f &lt;phase_defused+0x7b&gt;</span><br><span class="line">  4015e1:	4c 8d 44 24 10       	lea    0x10(%rsp),%r8</span><br><span class="line">  4015e6:	48 8d 4c 24 0c       	lea    0xc(%rsp),%rcx</span><br><span class="line">  4015eb:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx</span><br><span class="line">  4015f0:	be 19 26 40 00       	mov    $0x402619,%esi</span><br><span class="line">  4015f5:	bf 70 38 60 00       	mov    $0x603870,%edi</span><br><span class="line">  4015fa:	e8 f1 f5 ff ff       	call   400bf0 &lt;__isoc99_sscanf@plt&gt;</span><br><span class="line">  4015ff:	83 f8 03             	cmp    $0x3,%eax</span><br><span class="line">  401602:	75 31                	jne    401635 &lt;phase_defused+0x71&gt;</span><br><span class="line">  401604:	be 22 26 40 00       	mov    $0x402622,%esi</span><br><span class="line">  401609:	48 8d 7c 24 10       	lea    0x10(%rsp),%rdi</span><br><span class="line">  40160e:	e8 25 fd ff ff       	call   401338 &lt;strings_not_equal&gt;</span><br><span class="line">  401613:	85 c0                	test   %eax,%eax</span><br><span class="line">  401615:	75 1e                	jne    401635 &lt;phase_defused+0x71&gt;</span><br><span class="line">  401617:	bf f8 24 40 00       	mov    $0x4024f8,%edi</span><br><span class="line">  40161c:	e8 ef f4 ff ff       	call   400b10 &lt;puts@plt&gt;</span><br><span class="line">  401621:	bf 20 25 40 00       	mov    $0x402520,%edi</span><br><span class="line">  401626:	e8 e5 f4 ff ff       	call   400b10 &lt;puts@plt&gt;</span><br><span class="line">  40162b:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  401630:	e8 0d fc ff ff       	call   401242 &lt;secret_phase&gt;</span><br><span class="line">  401635:	bf 58 25 40 00       	mov    $0x402558,%edi</span><br><span class="line">  40163a:	e8 d1 f4 ff ff       	call   400b10 &lt;puts@plt&gt;</span><br><span class="line">  40163f:	48 8b 44 24 68       	mov    0x68(%rsp),%rax</span><br><span class="line">  401644:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax</span><br><span class="line">  40164b:	00 00 </span><br><span class="line">  40164d:	74 05                	je     401654 &lt;phase_defused+0x90&gt;</span><br><span class="line">  40164f:	e8 dc f4 ff ff       	call   400b30 &lt;__stack_chk_fail@plt&gt;</span><br><span class="line">  401654:	48 83 c4 78          	add    $0x78,%rsp</span><br><span class="line">  401658:	c3                   	ret</span><br><span class="line">  401659:	90                   	nop</span><br><span class="line">  40165a:	90                   	nop</span><br><span class="line">  40165b:	90                   	nop</span><br><span class="line">  40165c:	90                   	nop</span><br><span class="line">  40165d:	90                   	nop</span><br><span class="line">  40165e:	90                   	nop</span><br><span class="line">  40165f:	90                   	nop</span><br></pre></td></tr></table></figure>
+<p>The existence of a <strong>secret_phase</strong> can be identified by examining the <code>&lt;phase_defused&gt;</code> function. When inspecting at address <code>0x402619</code> with <code>(gdb) x/s 0x402619</code>, the format string <code>&quot;%d %d %s&quot;</code> is revealed. </p>
+<p>To investigate further, set a breakpoint at <code>0x4015fa</code> using <code>(gdb) b *0x4015fa</code>. After running the bomb executable and providing the correct solution for the earlier phases, we can examine the content at address <code>0x603870</code> with <code>(gdb) x/s 0x603870</code> (since the breakpoint is triggered during phase_4). This reveals that the <code>&quot;%d %d %s&quot;</code> format corresponds to the <strong>fourth phase</strong>, and we need to determine the correct string to enter along with the two integers.</p>
+<p>The code segment <code>lea 0x10(%rsp),%rdi</code> loads the address of the user-supplied string (the third argument) into <code>%rdi</code>, while <code>mov $0x402622,%esi</code> loads the address of the expected ciphertext into <code>%esi</code>. By examining memory with <code>(gdb) x/s 0x402622</code>, we obtain the string <code>DrEvil</code>. This is the secret password needed to unlock the hidden phase.</p>
+<p>Thus, to pass phase_4 and activate the secret_phase, we must append <code>DrEvil</code> as a third input after the two integer answers. One complete input sequence for the entire bomb could be:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">Border relations with Canada have never been better.</span><br><span class="line">1 2 4 8 16 32</span><br><span class="line">0 207</span><br><span class="line">0 0 DrEvil</span><br><span class="line">ionefg</span><br><span class="line">4 3 2 1 6 5</span><br><span class="line">``</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">```assembly</span><br><span class="line">0000000000401204 &lt;fun7&gt;:</span><br><span class="line">  401204:	48 83 ec 08          	sub    $0x8,%rsp</span><br><span class="line">  401208:	48 85 ff             	test   %rdi,%rdi</span><br><span class="line">  40120b:	74 2b                	je     401238 &lt;fun7+0x34&gt;</span><br><span class="line">  40120d:	8b 17                	mov    (%rdi),%edx</span><br><span class="line">  40120f:	39 f2                	cmp    %esi,%edx</span><br><span class="line">  401211:	7e 0d                	jle    401220 &lt;fun7+0x1c&gt;</span><br><span class="line">  401213:	48 8b 7f 08          	mov    0x8(%rdi),%rdi</span><br><span class="line">  401217:	e8 e8 ff ff ff       	call   401204 &lt;fun7&gt;</span><br><span class="line">  40121c:	01 c0                	add    %eax,%eax</span><br><span class="line">  40121e:	eb 1d                	jmp    40123d &lt;fun7+0x39&gt;</span><br><span class="line">  401220:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">  401225:	39 f2                	cmp    %esi,%edx</span><br><span class="line">  401227:	74 14                	je     40123d &lt;fun7+0x39&gt;</span><br><span class="line">  401229:	48 8b 7f 10          	mov    0x10(%rdi),%rdi</span><br><span class="line">  40122d:	e8 d2 ff ff ff       	call   401204 &lt;fun7&gt;</span><br><span class="line">  401232:	8d 44 00 01          	lea    0x1(%rax,%rax,1),%eax</span><br><span class="line">  401236:	eb 05                	jmp    40123d &lt;fun7+0x39&gt;</span><br><span class="line">  401238:	b8 ff ff ff ff       	mov    $0xffffffff,%eax</span><br><span class="line">  40123d:	48 83 c4 08          	add    $0x8,%rsp</span><br><span class="line">  401241:	c3                   	ret</span><br><span class="line">0000000000401242 &lt;secret_phase&gt;:</span><br><span class="line">  401242:	53                   	push   %rbx</span><br><span class="line">  401243:	e8 56 02 00 00       	call   40149e &lt;read_line&gt;</span><br><span class="line">  401248:	ba 0a 00 00 00       	mov    $0xa,%edx</span><br><span class="line">  40124d:	be 00 00 00 00       	mov    $0x0,%esi</span><br><span class="line">  401252:	48 89 c7             	mov    %rax,%rdi</span><br><span class="line">  401255:	e8 76 f9 ff ff       	call   400bd0 &lt;strtol@plt&gt;</span><br><span class="line">  40125a:	48 89 c3             	mov    %rax,%rbx</span><br><span class="line">  40125d:	8d 40 ff             	lea    -0x1(%rax),%eax</span><br><span class="line">  401260:	3d e8 03 00 00       	cmp    $0x3e8,%eax</span><br><span class="line">  401265:	76 05                	jbe    40126c &lt;secret_phase+0x2a&gt;</span><br><span class="line">  401267:	e8 ce 01 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  40126c:	89 de                	mov    %ebx,%esi</span><br><span class="line">  40126e:	bf f0 30 60 00       	mov    $0x6030f0,%edi</span><br><span class="line">  401273:	e8 8c ff ff ff       	call   401204 &lt;fun7&gt;</span><br><span class="line">  401278:	83 f8 02             	cmp    $0x2,%eax</span><br><span class="line">  40127b:	74 05                	je     401282 &lt;secret_phase+0x40&gt;</span><br><span class="line">  40127d:	e8 b8 01 00 00       	call   40143a &lt;explode_bomb&gt;</span><br><span class="line">  401282:	bf 38 24 40 00       	mov    $0x402438,%edi</span><br><span class="line">  401287:	e8 84 f8 ff ff       	call   400b10 &lt;puts@plt&gt;</span><br><span class="line">  40128c:	e8 33 03 00 00       	call   4015c4 &lt;phase_defused&gt;</span><br><span class="line">  401291:	5b                   	pop    %rbx</span><br><span class="line">  401292:	c3                   	ret</span><br><span class="line">  401293:	90                   	nop</span><br><span class="line">  401294:	90                   	nop</span><br><span class="line">  401295:	90                   	nop</span><br><span class="line">  401296:	90                   	nop</span><br><span class="line">  401297:	90                   	nop</span><br><span class="line">  401298:	90                   	nop</span><br><span class="line">  401299:	90                   	nop</span><br><span class="line">  40129a:	90                   	nop</span><br><span class="line">  40129b:	90                   	nop</span><br><span class="line">  40129c:	90                   	nop</span><br><span class="line">  40129d:	90                   	nop</span><br><span class="line">  40129e:	90                   	nop</span><br><span class="line">  40129f:	90                   	nop</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>lea    -0x1(%rax),%eax</code> &amp; <code>cmp    $0x3e8,%eax</code></p>
+<p>  The range of the input number must be $[1,1001]$.</p>
+</li>
+<li><p><code>mov    %ebx,%esi</code> &amp; <code>mov    $0x6030f0,%edi</code> &amp; <code>call   401204 &lt;fun7&gt;</code> &amp; <code>cmp    $0x2,%eax</code></p>
+<p>  The condition for passing the secret phase is that the return value of <code>fun7(0x6030f0, input)</code> must equal <strong>2</strong>.</p>
+</li>
+<li><p><code>&lt;fun7&gt;</code></p>
+<p>  Using <code>(gdb) x/60x 0x6030f0</code> to inspect memory, we obtain the following data:</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">0x6030f0 &lt;n1&gt;:  0x0000000000000024      0x0000000000603110</span><br><span class="line">0x603100 &lt;n1+16&gt;:       0x0000000000603130      0x0000000000000000</span><br><span class="line">0x603110 &lt;n21&gt;: 0x0000000000000008      0x0000000000603190</span><br><span class="line">0x603120 &lt;n21+16&gt;:      0x0000000000603150      0x0000000000000000</span><br><span class="line">0x603130 &lt;n22&gt;: 0x0000000000000032      0x0000000000603170</span><br><span class="line">0x603140 &lt;n22+16&gt;:      0x00000000006031b0      0x0000000000000000</span><br><span class="line">0x603150 &lt;n32&gt;: 0x0000000000000016      0x0000000000603270</span><br><span class="line">0x603160 &lt;n32+16&gt;:      0x0000000000603230      0x0000000000000000</span><br><span class="line">0x603170 &lt;n33&gt;: 0x000000000000002d      0x00000000006031d0</span><br><span class="line">0x603180 &lt;n33+16&gt;:      0x0000000000603290      0x0000000000000000</span><br><span class="line">0x603190 &lt;n31&gt;: 0x0000000000000006      0x00000000006031f0</span><br><span class="line">0x6031a0 &lt;n31+16&gt;:      0x0000000000603250      0x0000000000000000</span><br><span class="line">0x6031b0 &lt;n34&gt;: 0x000000000000006b      0x0000000000603210</span><br><span class="line">0x6031c0 &lt;n34+16&gt;:      0x00000000006032b0      0x0000000000000000</span><br><span class="line">0x6031d0 &lt;n45&gt;: 0x0000000000000028      0x0000000000000000</span><br><span class="line">0x6031e0 &lt;n45+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x6031f0 &lt;n41&gt;: 0x0000000000000001      0x0000000000000000</span><br><span class="line">0x603200 &lt;n41+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x603210 &lt;n47&gt;: 0x0000000000000063      0x0000000000000000</span><br><span class="line">0x603220 &lt;n47+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x603230 &lt;n44&gt;: 0x0000000000000023      0x0000000000000000</span><br><span class="line">0x603240 &lt;n44+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x603250 &lt;n42&gt;: 0x0000000000000007      0x0000000000000000</span><br><span class="line">0x603260 &lt;n42+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x603270 &lt;n43&gt;: 0x0000000000000014      0x0000000000000000</span><br><span class="line">0x603280 &lt;n43+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x603290 &lt;n46&gt;: 0x000000000000002f      0x0000000000000000</span><br><span class="line">0x6032a0 &lt;n46+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x6032b0 &lt;n48&gt;: 0x00000000000003e9      0x0000000000000000</span><br><span class="line">0x6032c0 &lt;n48+16&gt;:      0x0000000000000000      0x0000000000000000</span><br></pre></td></tr></table></figure>
+<p>  A BST can be constructed at address <code>0x6030f0</code>:</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">            36 (n1)</span><br><span class="line">           /      \</span><br><span class="line">          /        \</span><br><span class="line">        8 (n21)    50 (n22)</span><br><span class="line">       /   \       /    \</span><br><span class="line">      /     \     /      \</span><br><span class="line">   6 (n31) 22(n32) 45(n33) 107(n34)</span><br><span class="line">   /  \    /  \    /  \    /   \</span><br><span class="line"> 1    7  20   35  40  47  99  1001</span><br><span class="line">(n41)(n42)(n43)(n44)(n45)(n46)(n47)(n48)</span><br></pre></td></tr></table></figure>
+<p>  Translating the assembly logic of <code>fun7</code> into C language:</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">func7</span> <span class="params">(T *u,<span class="type">int</span> target)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (u == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (&amp;u &lt;= target)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (&amp;u == target) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">2</span> * func7 (p -&gt; right,target) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">2</span> * func7 (p -&gt; left,target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  The function encodes the search path as a binary number. To obtain a return value of 2, the recursive sequence must satisfy $2 \times (2 \times 0 + 1) = 2$. This corresponds to the search path <strong>left → right → match</strong>: from root (36) go left to 8, then right to 22, where the value is found.</p>
+<p>  Thus, the input that satisfies <code>fun7(0x6030f0, input) == 2</code> is <code>22</code>.</p>
+</li>
+</ul>
+<hr>
+<p>Final answer:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Border relations with Canada have never been better.</span><br><span class="line">1 2 4 8 16 32</span><br><span class="line">0 207</span><br><span class="line">0 0 DrEvil</span><br><span class="line">ionefg</span><br><span class="line">4 3 2 1 6 5</span><br><span class="line">22</span><br></pre></td></tr></table></figure></article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>License</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+
+    <section id="share">
+      <div class="header"><span>Share</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://sunchaoyi923.github.io/2025/12/28/Bomb%20Lab/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item email" href="mailto:?subject=CMU CS:APP Bomb Lab - SUNCHAOYI&amp;body=https://sunchaoyi923.github.io/2025/12/28/Bomb%20Lab/"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://sunchaoyi923.github.io/2025/12/28/Bomb%20Lab/"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">Newer</div><a href="/2025/12/28/Attack%20Lab/">CMU CS:APP Attack Lab</a></div><div class="item" id="next"><div class="note">Older</div><a href="/2025/12/25/Data%20Lab/">CMU CS:APP Data Lab</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Chaoyi, Sun</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CS-APP-Bomb-Lab-Report"><span class="toc-text">CS:APP Bomb Lab Report</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-1"><span class="toc-text">Phase_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-2"><span class="toc-text">Phase_2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-3"><span class="toc-text">Phase_3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-4"><span class="toc-text">Phase_4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-5"><span class="toc-text">Phase_5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-6"><span class="toc-text">Phase_6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secret-phase"><span class="toc-text">secret_phase</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>Scroll to Top</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `Just`,
+      min: `minutes ago`,
+      hour: `hours ago`,
+      day: `days ago`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":[],"codeblock":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `Switched to Light Mode`,
+      dark: `Switched to Dark Mode`,
+      auto: `Switched to Auto Mode`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+
+<script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  MathJax.Hub.Config({
+    tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

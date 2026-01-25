@@ -28,7 +28,7 @@
 <meta property="og:description" content="前言已经高二了，依旧是蒟蒻。应该是最后一次比赛了，所以打算拼一把。 就从国庆这一天开始写起吧。没啥逻辑，想到啥就说点啥，也算是记录一下一个信竞生的日常吧。 $\texttt{2022.10.01}$大概是开始零碎的复习了。 先从树链剖分入手，大概是每天码一题的样子，但是弱智的错误还是接连不断。什么询问下标没用改成 $\texttt{dfn}$ 序啊，深搜写的时候忘记更新重儿子导致剖分了个寂寞啊等等">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-23T14:27:36.083Z">
+<meta property="article:modified_time" content="2026-01-25T12:09:09.788Z">
 <meta property="article:author" content="Chaoyi, Sun">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -48,7 +48,7 @@
 
   
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Chaoyi, Sun","sameAs":[]},"dateCreated":"2022-10-04T00:00:00+08:00","dateModified":"2026-01-23T22:27:36+08:00","datePublished":"2022-10-04T00:00:00+08:00","description":"","headline":"2022 NOIP 备赛记","mainEntityOfPage":{"@type":"WebPage","@id":"https://sunchaoyi923.github.io/2022/10/04/NOIP2022/"},"publisher":{"@type":"Organization","name":"Chaoyi, Sun","sameAs":[]},"url":"https://sunchaoyi923.github.io/2022/10/04/NOIP2022/","thumbnailUrl":"/img/programming.png","image":1}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Chaoyi, Sun","sameAs":[]},"dateCreated":"2022-10-04T00:00:00+08:00","dateModified":"2026-01-25T20:09:09+08:00","datePublished":"2022-10-04T00:00:00+08:00","description":"","headline":"2022 NOIP 备赛记","mainEntityOfPage":{"@type":"WebPage","@id":"https://sunchaoyi923.github.io/2022/10/04/NOIP2022/"},"publisher":{"@type":"Organization","name":"Chaoyi, Sun","sameAs":[]},"url":"https://sunchaoyi923.github.io/2022/10/04/NOIP2022/","thumbnailUrl":"/img/programming.png","image":1}</script>
   <link rel="shortcut icon" href="/img/Avatar.jpg"><meta name="theme-color" content="#f8f8f8"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" media="all" />
 </head>
 <body><div class="sitebg"><div class="siteblur"></div></div>
@@ -67,7 +67,7 @@
 
 
 
-<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2025/05/02/XCPC2025-2026/"><span class="title">2025-2026 XCPC</span></a><a class="item title" href="/2026/01/23/hash/"><span class="title">2022 NOIP 备赛记</span></a><a class="item title" href="/2022/10/04/NOIP2022/"><span class="title">2022 NOIP 备赛记</span></a><a class="item title" href="/2024/08/13/XOR/"><span class="title">求 $[1,n]$ 的异或和</span></a><a class="item title" href="/2025/01/03/summary24/"><span class="title">2024 年度小结</span></a><a class="item title" href="/2025/12/25/Data%20Lab/"><span class="title">CMU CS:APP Data Lab</span></a><a class="item title" href="/2025/12/28/Attack%20Lab/"><span class="title">CMU CS:APP Attack Lab</span></a><a class="item title" href="/2020/11/20/UVA1401/"><span class="title">题解：UVA1401 Remember the Word</span></a><a class="item title" href="/2022/01/22/WC2022/"><span class="title">WC 2022 学习笔记</span></a><a class="item title" href="/2021/08/15/UVA1626/"><span class="title">题解：UVA1626 括号序列 Brackets sequence</span></a></div></widget>
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2022/10/04/NOIP2022/"><span class="title">2022 NOIP 备赛记</span></a><a class="item title" href="/2026/01/05/Architecture%20Lab/"><span class="title">CMU CS:APP Architecture Lab</span></a><a class="item title" href="/2025/12/28/Bomb%20Lab/"><span class="title">CMU CS:APP Bomb Lab</span></a><a class="item title" href="/2025/05/02/XCPC2025-2026/"><span class="title">2025-2026 XCPC</span></a><a class="item title" href="/2026/01/23/hash/"><span class="title">卡哈希</span></a><a class="item title" href="/2024/08/13/XOR/"><span class="title">求 $[1,n]$ 的异或和</span></a><a class="item title" href="/2025/01/03/summary24/"><span class="title">2024 年度小结</span></a><a class="item title" href="/2025/12/25/Data%20Lab/"><span class="title">CMU CS:APP Data Lab</span></a><a class="item title" href="/2025/12/28/Attack%20Lab/"><span class="title">CMU CS:APP Attack Lab</span></a><a class="item title" href="/2020/10/19/UVA12167/"><span class="title">题解：UVA12167 Proving Equivalences</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -80,7 +80,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Journal/">Journal</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2022-10-03T16:00:00.000Z">2022-10-04</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2026-01-23T14:27:36.083Z">2026-01-23</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2022-10-03T16:00:00.000Z">2022-10-04</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2026-01-25T12:09:09.788Z">2026-01-25</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -161,11 +161,11 @@
 <p>$\texttt{T1}$ 属于是无脑模拟，确定 $n$ 个化学方程式中的每一个化学方程式是否平衡，然后加了一堆便于操作而产生的条件。一开始写乱了，后来果断重构，写成函数，然后一发过样例，就没管它了。</p>
 <p>$\texttt{T2}$ $60\texttt{ pts}$ 的部分分一眼秒，属于是二维前缀和优化求最大值，时间复杂度为 $O(n^4)$。然后考虑优化，容易想到固定 $x_1,y_1,x_2$ 时，$y_2$ 的枚举是可以一直往一个方向扫的，因此考虑尺取法。</p>
 <p>考虑一个结论，令一个矩形的价格之和为 $s$，若 $s \in [a,b]$，画一下数轴可知此时是最优解，而 $s$ 如果在这个区间之外，则需要尽量的靠近这个区间。</p>
-<p>所以尺取法以 $<a$ 和 $>b$ 为边界，正反扫两次，由于每个数最多被扫一次，所以时间复杂度为 $O(n^3)$，常数不大，可以通过此题。</p>
+<p>所以尺取法以 $\lt a$ 和 $&gt;b$ 为边界，正反扫两次，由于每个数最多被扫一次，所以时间复杂度为 $O(n^3)$，常数不大，可以通过此题。</p>
 <p><del>我不会说赛时因为自己 sb，只判断了两个极值然后写挂的。</del></p>
 <p>$\texttt{T3}$</p>
 <p>贪心可知找到距离最近的一个电梯然后向上走即可，于是题目转化为求距离 $x$ 最近的电梯。不难想到用线段树（求区间最大值）与二分维护，似乎直接线段树二分也行，复杂度还能少个 $\log$，之后直接求两点的劣弧的距离即可（笑死，赛时这里写挂了）。</p>
-<p>由于成环的特性，直接进行线段树操作并不方便，考虑开三倍的数组，$x,x + n,x + 2 \times n$ 均维护同一个位置，这样前后走的时候就方便处理了。</p>
+<p>由于成环的特性，直接进行线段树操作并不方便，考虑开三倍的数组 $x,x + n,x + 2 \times n$ 均维护同一个位置，这样前后走的时候就方便处理了。</p>
 <p>最后在 <code>query</code> 的时候加了个优化，如果左区间返回非零值就可以直接结束，这样刚好能够使 $O(n \log ^2 n)$ 大常数的线段树过了这道题。</p>
 <p><strong>【updated】</strong> 发现题解写了一个记忆化搜索就过了，我敲！</p>
 <p>$\texttt{T4}$</p>
@@ -232,7 +232,7 @@
 </ul>
 <p>集合的最大数一定是所给中的最大值，于是我们又可以枚举每一个数，判断是否存在。对于一个输入中不包括的数 $x$，将所有已经存在于集合的 $kx$ 的 $k$ 进行 $\gcd$ 运算，若最后的结果为 $1$，则说明最后能够得到 $x$，将其标记后加入答案即可。时间复杂度为调和级数以及外层的枚举，为 $O(n \log n)$。</p>
 <ul>
-<li>求 $\sum_{i = 1}^{n} n \% i$ 的值。</li>
+<li>求 $\sum_{i = 1}^{n} n \bmod i$ 的值。</li>
 </ul>
 <p>原式可以变为 $\sum_{i = 1}^{n} n - \lfloor \dfrac{n}{i} \rfloor \times i = n^2 - \sum_{i = 1}^{n} \lfloor \dfrac{n}{i} \rfloor \times i$。后者显然用整除分块加上等差数列求和维护即可，需要注意取模以及数据范围（$n$ 先取模后运算，否则会爆），时间复杂度为 $O(\sqrt n)$。</p>
 <h3 id="texttt-2022-10-28"><a href="#texttt-2022-10-28" class="headerlink" title="$\texttt{2022.10.28}$"></a>$\texttt{2022.10.28}$</h3><p>【插播广告】 今天是巨佬 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/115271">$\texttt{CENRUIYANG}$</a> 的生日，让我们一起祝他生日快乐。把这条消息转发到五个群，就能向他一样爆切 $\texttt{IOI}$ 了（狗头。</p>
@@ -449,7 +449,7 @@
 <p>好了，写完了，明天比赛加油吧！$\texttt{rp++!}$</p>
 <h3 id="texttt-2022-11-26"><a href="#texttt-2022-11-26" class="headerlink" title="$\texttt{2022.11.26}$"></a>$\texttt{2022.11.26}$</h3><p>要去打 $\texttt{NOIP}$ 了。</p>
 <p>$\texttt{T1}$ 先写了 $76$，然后打算再次前缀和优化，但是一直错就放着了。然后开 $\texttt{T2}$，想到了构造解法，一直尝试实现，但是实现不出来，此时时间仅剩 $\texttt{1h}$。这时候整个人已经慌了，于是 $\texttt{T3}$ 的 <code>tarjan</code> 写挂，只在最后一题拿了 $8$ 分。</p>
-<p>预估 $76 + 15 + 0 + 8$，实测第二题的暴力也写错了，于是变成 $84 \texttt{pts}$ 滚粗。</p>
+<p>预估 $76 + 0 + 0 + 8$，实测第二题的暴力也写错了，于是变成 $84 \texttt{pts}$ 滚粗。</p>
 <p>比赛开始前想的是写完第一题就去打暴力，但是实际却是死磕第二题，然后没时间写暴力。退役前的最后一场比赛算是完全得崩了。【要是当是努力调完 $\texttt{T1}$，后面直接写部分分，那么 $100 + 30-50 + 35+ 8$ 并不是问题，估计也能拿个 $1=$ 了，现在连 $2=$ 都不保……】</p>
 <p>【upd】 好叭，还有二等，距离一等就差在了写挂的 $\texttt{T2 T3}$ 的暴力分上。</p>
 <h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>不断拼搏的 $\texttt{OI}$ 生涯算是结束了，不知道高三这年会不会来玩玩。【结局：高三还是来玩并且圆梦 $\texttt{1=}$】</p>

@@ -17,19 +17,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
-  <title>2022 NOIP 备赛记 - SUNCHAOYI</title>
+  <title>卡哈希 - SUNCHAOYI</title>
 
   
     <meta name="description" content="本文摘自 cancan123456 的《卡哈希》。   本文基于 NOI WC 2024 csy 专家进行的讲解。  什么？你还在为卡不掉选手的十模哈希而感到痛苦？ 什么？你还在 CF hack 时看着对方的随机五十模数哈希而感到迷茫？ 不要担心，现隆重向您推出——LLL 算法卡哈希！ 在这之前，我们快速回顾一下几种简单的卡哈希方法。 OI 中常见的字符串哈希函数一般形如下式： H(s)&#x3D;\sum">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2022 NOIP 备赛记">
+<meta property="og:title" content="卡哈希">
 <meta property="og:url" content="https://sunchaoyi923.github.io/2026/01/23/hash/">
 <meta property="og:site_name" content="SUNCHAOYI">
 <meta property="og:description" content="本文摘自 cancan123456 的《卡哈希》。   本文基于 NOI WC 2024 csy 专家进行的讲解。  什么？你还在为卡不掉选手的十模哈希而感到痛苦？ 什么？你还在 CF hack 时看着对方的随机五十模数哈希而感到迷茫？ 不要担心，现隆重向您推出——LLL 算法卡哈希！ 在这之前，我们快速回顾一下几种简单的卡哈希方法。 OI 中常见的字符串哈希函数一般形如下式： H(s)&#x3D;\sum">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-f884b6f2bc188bef8140d495c1c4dcd0_1440w.webp">
 <meta property="article:published_time" content="2026-01-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-23T15:47:08.333Z">
+<meta property="article:modified_time" content="2026-01-25T11:04:39.505Z">
 <meta property="article:author" content="Chaoyi, Sun">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-f884b6f2bc188bef8140d495c1c4dcd0_1440w.webp">
@@ -50,7 +50,7 @@
 
   
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Chaoyi, Sun","sameAs":[]},"dateCreated":"2026-01-23T00:00:00+08:00","dateModified":"2026-01-23T23:47:08+08:00","datePublished":"2026-01-23T00:00:00+08:00","description":"","headline":"2022 NOIP 备赛记","mainEntityOfPage":{"@type":"WebPage","@id":"https://sunchaoyi923.github.io/2026/01/23/hash/"},"publisher":{"@type":"Organization","name":"Chaoyi, Sun","sameAs":[]},"url":"https://sunchaoyi923.github.io/2026/01/23/hash/","thumbnailUrl":"/img/luogu.png","image":1}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Chaoyi, Sun","sameAs":[]},"dateCreated":"2026-01-23T00:00:00+08:00","dateModified":"2026-01-25T19:04:39+08:00","datePublished":"2026-01-23T00:00:00+08:00","description":"","headline":"卡哈希","mainEntityOfPage":{"@type":"WebPage","@id":"https://sunchaoyi923.github.io/2026/01/23/hash/"},"publisher":{"@type":"Organization","name":"Chaoyi, Sun","sameAs":[]},"url":"https://sunchaoyi923.github.io/2026/01/23/hash/","thumbnailUrl":"/img/luogu.png","image":1}</script>
   <link rel="shortcut icon" href="/img/Avatar.jpg"><meta name="theme-color" content="#f8f8f8"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" media="all" />
 </head>
 <body><div class="sitebg"><div class="siteblur"></div></div>
@@ -69,7 +69,7 @@
 
 
 
-<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2025/05/02/XCPC2025-2026/"><span class="title">2025-2026 XCPC</span></a><a class="item title" href="/2026/01/23/hash/"><span class="title">2022 NOIP 备赛记</span></a><a class="item title" href="/2022/10/04/NOIP2022/"><span class="title">2022 NOIP 备赛记</span></a><a class="item title" href="/2024/08/13/XOR/"><span class="title">求 $[1,n]$ 的异或和</span></a><a class="item title" href="/2025/01/03/summary24/"><span class="title">2024 年度小结</span></a><a class="item title" href="/2025/12/25/Data%20Lab/"><span class="title">CMU CS:APP Data Lab</span></a><a class="item title" href="/2025/12/28/Attack%20Lab/"><span class="title">CMU CS:APP Attack Lab</span></a><a class="item title" href="/2020/11/20/UVA1401/"><span class="title">题解：UVA1401 Remember the Word</span></a><a class="item title" href="/2022/01/22/WC2022/"><span class="title">WC 2022 学习笔记</span></a><a class="item title" href="/2021/08/15/UVA1626/"><span class="title">题解：UVA1626 括号序列 Brackets sequence</span></a></div></widget>
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">Recent Update</span></div><div class="widget-body fs14"><a class="item title" href="/2022/10/04/NOIP2022/"><span class="title">2022 NOIP 备赛记</span></a><a class="item title" href="/2026/01/05/Architecture%20Lab/"><span class="title">CMU CS:APP Architecture Lab</span></a><a class="item title" href="/2025/12/28/Bomb%20Lab/"><span class="title">CMU CS:APP Bomb Lab</span></a><a class="item title" href="/2025/05/02/XCPC2025-2026/"><span class="title">2025-2026 XCPC</span></a><a class="item title" href="/2026/01/23/hash/"><span class="title">卡哈希</span></a><a class="item title" href="/2024/08/13/XOR/"><span class="title">求 $[1,n]$ 的异或和</span></a><a class="item title" href="/2025/01/03/summary24/"><span class="title">2024 年度小结</span></a><a class="item title" href="/2025/12/25/Data%20Lab/"><span class="title">CMU CS:APP Data Lab</span></a><a class="item title" href="/2025/12/28/Attack%20Lab/"><span class="title">CMU CS:APP Attack Lab</span></a><a class="item title" href="/2020/10/19/UVA12167/"><span class="title">题解：UVA12167 Proving Equivalences</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -82,12 +82,12 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Algoirthm/">Algoirthm</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2026-01-22T16:00:00.000Z">2026-01-23</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2026-01-23T15:47:08.333Z">2026-01-23</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">Posted on: <time datetime="2026-01-22T16:00:00.000Z">2026-01-23</time></span><span class="sep updated"></span><span class="text updated">Updated on: <time datetime="2026-01-25T11:04:39.505Z">2026-01-25</time></span></div></div></div>
     
     <div class="bottom only-title">
       
       <div class="text-area">
-        <h1 class="text title"><span>2022 NOIP 备赛记</span></h1>
+        <h1 class="text title"><span>卡哈希</span></h1>
         
       </div>
     </div>
@@ -223,7 +223,7 @@
       <div class="header"><span>Share</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://sunchaoyi923.github.io/2026/01/23/hash/" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item email" href="mailto:?subject=2022 NOIP 备赛记 - SUNCHAOYI&amp;body=https://sunchaoyi923.github.io/2026/01/23/hash/"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item email" href="mailto:?subject=卡哈希 - SUNCHAOYI&amp;body=https://sunchaoyi923.github.io/2026/01/23/hash/"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;Copied!&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://sunchaoyi923.github.io/2026/01/23/hash/"/>
@@ -233,7 +233,7 @@
     </section>
     </div>
 
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">Older</div><a href="/2026/01/01/CUHKSZ%20Notes/">CUHK-Shenzhen Notes</a></div></section></div>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">Older</div><a href="/2026/01/05/Architecture%20Lab/">CMU CS:APP Architecture Lab</a></div></section></div>
 
 
 
